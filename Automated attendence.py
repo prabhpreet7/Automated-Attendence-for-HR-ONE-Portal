@@ -23,6 +23,8 @@ driver.get('your HR-One portal link')
 driver.find_element_by_id('UserName').send_keys('your id')
 time.sleep(2)
 
+wd = WebDriverWait(driver, 5)
+
 while(True):
     try:
         WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.ID,"anchor66")))
@@ -34,15 +36,15 @@ while(True):
         driver.find_element_by_id('btnLogin').click()
         
 try:
-    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID,"anchor66"))).click()
-    WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID,"anchor72"))).click()
+    wd.until(EC.element_to_be_clickable((By.ID,"anchor66"))).click()
+    wd.until(EC.element_to_be_clickable((By.ID,"anchor72"))).click()
 
     for date in dates:
-        WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.LINK_TEXT,"Apply New"))).click()
-        WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.LINK_TEXT,"On Duty"))).click()
-        WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH,"//select[@name='ODTypeDDL']/option[text()='Client Visit']"))).click()
-        WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID,"odDate1"))).send_keys(date)
-        WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID,"txtOdRemark"))).send_keys('Work From Home')
+        wd.until(EC.element_to_be_clickable((By.LINK_TEXT,"Apply New"))).click()
+        wd.until(EC.element_to_be_clickable((By.LINK_TEXT,"On Duty"))).click()
+        wd.until(EC.element_to_be_clickable((By.XPATH,"//select[@name='ODTypeDDL']/option[text()='Client Visit']"))).click()
+        wd.until(EC.element_to_be_clickable((By.ID,"odDate1"))).send_keys(date)
+        wd.until(EC.element_to_be_clickable((By.ID,"txtOdRemark"))).send_keys('Work From Home')
         driver.find_element_by_id('btnOdSave').click()
         time.sleep(2)
         if "Request already exists" in driver.page_source:
